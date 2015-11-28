@@ -1,7 +1,8 @@
 body{
 	font-family: 'News Cycle', sans-serif;
 	font-size: 16px;
-	background-color: #04a36f;
+	background-image: url(https://images.unsplash.com/photo-1444952483853-7c36e902e722?crop=entropy&dpr=1.80&fit=crop&fm=jpg&h=775&ixjsv=2.0.0&ixlib=rb-0.3.5&q=55&w=1425);
+	background-size: 100% ;
 	color: #696969;
 	padding: 20px;
 }
@@ -12,6 +13,7 @@ body{
 	padding-right: 15px;
 	background-color: #ffffff;
 	border-radius: 0 0 5px 5px;
+	opacity: 0.8;
 }
 
 h1 {
