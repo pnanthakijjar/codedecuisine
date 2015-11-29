@@ -13,6 +13,22 @@
   <h1>Recipe Master</h1>
   <p>SEARCH RECIPES</p>
 
+	<form action="post.html" method="post">
+	Diet: <input type="text" name="search" value="diet"></input><br>
+	Recipe Name: <input type="text" name="recipename" value="recipename"></input>
+	</form>
+    <ul>
+    {% for recipe in diet %}
+    Diet: {{ recipe }}
+
+    {% endfor %}
+
+    {% for title in recipename %}
+    Recipe: 
+    <li>{{ title }}</li>
+
+    {% endfor %}
+    </ul>
   <footer id="footer"></footer>
   </div>
 

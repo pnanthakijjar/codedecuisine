@@ -14,7 +14,13 @@ def search():
 	recipe_list = []
 
 	for x in request.form:
-		recipe_chosen.append(int(x))
+		if x == general:
+			#do the check with recipe name/title
+			recipe_chosen.append(str(x))
+
+		elif x == diet:
+			#do the check with diets
+			recipe_chosen.append(str(x))
 
 	for recipe in recipe_chosen:
 		recipe_list.append(recipesdb.RecipeList()[recipe])
