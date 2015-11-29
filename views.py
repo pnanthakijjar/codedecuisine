@@ -27,16 +27,6 @@ def search():
 
 	return render_template('search.html', recipelist=recipe_list)
 
-@app.route('/view_recipes', methods=['POST'])
-#Show ALL RECIPES
-def view_recipes():
-	recipe_list = []
-
-	for r in recipesdb:
-		recipe_list.append(r)
-
-	return render_template('view_recipes.html', recipelist=recipe_list)
-
 @app.route('/edit_recipes')
 def edit():
 	return render_template('edit_recipes.html', author=author, name=name)
