@@ -1,9 +1,48 @@
-from flask import Flask
+from flask import Flask, render_template, request, redirect
 app = Flask(__name__)
+import MySQLdb
+import MySQLdb.cursors
+import gc
+gc.collect()
 
 @app.route('/')
-def homepage():
-	return 'Hello World!'
+def index():
+    #return rv[0]['name']
+    return render_template('index.html')
+
+@app.route('/my-link/')
+def my_link():
+    db = MySQLdb.connect(host="localhost", user="root", db="cuisineRecipes",
+                        cursorclass=MySQLdb.cursors.DictCursor)
+    cursor = db.cursor()
+    diet = "3"
+    cursor.execute("""SELECT * FROM Diets WHERE dietID=%s""", (diet))
+    rv = cursor.fetchall()
+    db.close()
+    return rv[0]['name']
+
+@app.route('/home')
+def home():
+    return '<h1>Hello, Home!!!</h1>'
+
+@app.route('/search')
+def search():
+    #return '<h1>Hello, Search!!!</h1>'
+    return render_template('search.html')
+
+@app.route('/view/<int:rec_id>')
+def view(rec_id):
+    return render_template('view.html', rec=rec_id)
+
+@app.route('/edit/<int:rec_id>')
+def edit(rec_id):
+    #return '<h1>Hello, Edit!!!</h1>'
+    return render_template('edit.html')
+
+@app.route('/submit')
+def submit():
+    #return '<h1>Hello, View!!!</h1>'
+    return render_template('submit.html')
 
 if __name__ == '__main__':
-	app.run(debug=True)
+    app.run(debug=True)
