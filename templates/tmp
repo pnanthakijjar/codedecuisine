@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Recipe Master</title>
+    <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='site.css') }}">
+</head>
+
+<body>
+    <nav id="navbar"></nav>
+
+    <div id="main">
+    <h1>Recipe Master</h1>
+    <p>SEARCH RECIPES</p>
+    <form method="POST" id="search_box" class='search' action="{{ url_for('search') }}">
+        <p>Keywords: <input type="text" name="general" id="general" value="Null"></p>
+        <p>Diet: <input type="text" name="diet" id="diet" value="Null"></p>
+        <input type="Submit" value="Search" name="Search">
+    </form>
+    <footer id="footer"></footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

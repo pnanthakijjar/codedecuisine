@@ -1,0 +1,86 @@
+# start mysql server
+mysql.server start
+
+# then to get into mysql
+mysql --user=root mysql
+
+# select db
+USE cuisineRecipes
+
+# show tables & info
+SHOW TABLES;
+DESCRIBE Recipies;
+
+# delete table
+DROP TABLE table_name;
+
+# quit mysql
+exit
+
+# start virtual env
+. venv/bin/activate
+
+# quit venv
+deactivate
+
+# tables from sequel pro
+CREATE TABLE `Diets` (
+  `dietID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(42) NOT NULL DEFAULT 'NONAME',
+  PRIMARY KEY (`dietID`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `FoodGroup` (
+  `groupID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(42) NOT NULL DEFAULT 'NONAME',
+  PRIMARY KEY (`groupID`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Ingredients` (
+  `ingredientID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(42) NOT NULL DEFAULT 'NONAME',
+  `group` varchar(42) NOT NULL DEFAULT 'UNKNOWN',
+  PRIMARY KEY (`ingredientID`),
+  KEY `group` (`group`),
+  FULLTEXT KEY `name` (`name`),
+  CONSTRAINT `ingredients_ibfk_1` FOREIGN KEY (`group`) REFERENCES `FoodGroup` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Recipes` (
+  `recipeID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(42) NOT NULL DEFAULT 'NONAME',
+  `description` mediumtext,
+  `diet` varchar(42) NOT NULL DEFAULT 'No Restrictions',
+  `servings` int(11) DEFAULT NULL,
+  PRIMARY KEY (`recipeID`),
+  KEY `diet` (`diet`),
+  FULLTEXT KEY `belongs_to` (`name`),
+  CONSTRAINT `recipes_ibfk_1` FOREIGN KEY (`diet`) REFERENCES `Diets` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `RecipeSteps` (
+  `stepNum` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `recipeID` int(11) unsigned NOT NULL,
+  `instruction` mediumtext,
+  PRIMARY KEY (`stepNum`),
+  KEY `recipeID` (`recipeID`),
+  CONSTRAINT `recipesteps_ibfk_1` FOREIGN KEY (`recipeID`) REFERENCES `Recipes` (`recipeID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Uses` (
+  `useID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `recipeID` int(11) unsigned NOT NULL,
+  `stepNum` int(11) unsigned NOT NULL,
+  `ingredientID` int(11) unsigned NOT NULL,
+  `measurment` varchar(42) DEFAULT NULL,
+  PRIMARY KEY (`useID`),
+  KEY `recipeID` (`recipeID`),
+  KEY `stepNum` (`stepNum`),
+  KEY `ingredientID` (`ingredientID`),
+  CONSTRAINT `uses_ibfk_1` FOREIGN KEY (`recipeID`) REFERENCES `Recipes` (`recipeID`),
+  CONSTRAINT `uses_ibfk_2` FOREIGN KEY (`stepNum`) REFERENCES `RecipeSteps` (`stepNum`),
+  CONSTRAINT `uses_ibfk_3` FOREIGN KEY (`ingredientID`) REFERENCES `Ingredients` (`ingredientID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

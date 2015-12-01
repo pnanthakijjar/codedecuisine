@@ -1,0 +1,26 @@
+from flask import Flask
+app = Flask(__name__)
+import MySQLdb
+import MySQLdb.cursors
+
+@app.route('/')
+def index():
+    db = MySQLdb.connect(host="localhost", user="root", db="cuisineRecipes", cursorclass=MySQLdb.cursors.DictCursor)
+    cursor = db.cursor()
+    diet = "3"
+    cursor.execute("""SELECT * FROM Diets WHERE dietID=%s""", (diet))
+    rv = cursor.fetchone()
+    db.close()
+    return rv['name']
+
+@app.route('/hello')
+def hello():
+    return '<h6>Hello!!!</h6>'
+
+@app.route('/world')
+def hello_world():
+    return '<h1>Hello World!</h1>'
+
+if __name__ == '__main__':
+    app.run(debug=True)
+

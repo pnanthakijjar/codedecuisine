@@ -1,0 +1,17 @@
+CREATE TABLE `Recipes` (
+    `recipeID` int(11) unsigned NOT NULL AUTO_INCREMENT, 
+    `name` varchar(42) NOT NULL DEFAULT 'NONAME', 
+    `description` mediumtext, 
+    `diet` varchar(42) NOT NULL DEFAULT 'No Restrictions', 
+    `servings` int(11) DEFAULT NULL, 
+    PRIMARY KEY (`recipeID`), 
+    KEY `belongs_to` (`diet`), 
+    CONSTRAINT `belongs_to` FOREIGN KEY (`diet`) REFERENCES `Diets` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+Create Trigger AddDiet
+After Insert On `Recipes`
+Referencing New Row as `NewTuple`
+For Each Row
+When (Not Exists (Select * from `Diets` Where `name`=`NewTuple.diet`))
+Insert Into `Diets` Values(NULL, `NewTuple.diet`);

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect
 import string
-import recipelistdb as recipesdb
+import cuisineRecipedb as recipesdb
 app = Flask(__name__)
 
 @app.route('/')
@@ -14,18 +14,22 @@ def search():
 	recipe_list = []
 
 	for x in request.form:
-		if x == general:
-			#do the check with recipe name/title
-			recipe_chosen.append(str(x))
-
-		elif x == diet:
-			#do the check with diets
-			recipe_chosen.append(str(x))
+		recipe_chosen.append(int(x))
 
 	for recipe in recipe_chosen:
 		recipe_list.append(recipesdb.RecipeList()[recipe])
 
 	return render_template('search.html', recipelist=recipe_list)
+
+@app.route('/view_recipes', methods=['POST'])
+#Show ALL RECIPES
+def view_recipes():
+	recipe_list = []
+
+	for r in recipesdb:
+		recipe_list.append(r)
+
+	return render_template('view_recipes.html', recipelist=recipe_list)
 
 @app.route('/edit_recipes')
 def edit():

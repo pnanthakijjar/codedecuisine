@@ -2,20 +2,36 @@
 <html>
 
 <head>
-  <title>Recipe Master</title>
-  <link href="site.css" rel="stylesheet">
+    <title>Recipe Master</title>
+    <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='site.css') }}">
 </head>
 
 <body>
-  <nav id="navbar"></nav>
+    <nav id="navbar"></nav>
 
-  <div id="main">
-  <h1>Recipe Master</h1>
-  <p>EDIT RECIPES</p>
+    <div id="main">
+    <h1>Recipe Master</h1>
+    <p>VIEW RECIPES</p>
+    <form id="vtable" action="{{ url_for('edited') }}" method="GET"><table><tr>
+        <th class="headcoil">Title</th>
+        <td class="tailcol"><textarea name="name" rows="1" cols="75">{{ rv["name"] }}</textarea></td></tr>
+        <th class="headcoil">Diet</th>
+        <td class="tailcol"><textarea name="diet" rows="1" cols="75">{{ rv["diet"] }}</textarea></td></tr>
+        <th class="headcoil">Description</th>
+        <td class="tailcol"><textarea name="desc" rows="6" cols="75">{{ rv["description"] }}</textarea></td></tr>
+        <th class="headcoil">Ingredients</th>
+        <td class="tailcol">
+            <textarea name="ingr" rows="6" cols="75">{{ rv["ingredients"] }}</textarea></td></tr>
+        <th class="headcoil">Instructions</th>
+        <td class="tailcol"><textarea name="inst" rows="10" cols="75">{{ rv["instructions"] }}</textarea></td></tr>
+    </table>
+    <input type="hidden" name="rID" value="{{ rv["recipeID"] }}" >
+    <input type="submit" value="submit" name="sub">
+    <input type="submit" value="cancel" name="can">
+    </form>
+    <footer id="footer"></footer>
+    </div>
 
-  <footer id="footer"></footer>
-  </div>
-
-  <script src="script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

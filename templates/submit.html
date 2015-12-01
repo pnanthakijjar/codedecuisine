@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Recipe Master</title>
+  <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='site.css') }}">
+</head>
+
+<body>
+  <nav id="navbar"></nav>
+
+  <div id="main">
+  <h1>Recipe Master</h1>
+
+  <h2> Add Recipes </h2>
+<!--
+  <form action="#" method="get">
+Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
+Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
+Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
+Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
+Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
+Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
+Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
+Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
+Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
+Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
+Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
+Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
+
+<input type="submit" name="submit" value="Submit"></input>
+</form>
+
+-->
+
+<form action="recipeform.php" method="post">
+   <p>Recipe Name: <input type="text" name="recipe_name" placeholder="Mysterious Wonders"/></p>
+
+   <p>Ingredient: <input type="text" name="ingredient" placeholder="1/2 cup of Flour" /></p>
+   <p>Ingredient: <input type="text" name="ingredient" placeholder="1 tbsp sugar"/></p>
+  <p>Ingredient: <input type="text" name="ingredient" /></p>
+   <p>Ingredient: <input type="text" name="ingredient" /></p>
+    <p>Ingredient: <input type="text" name="ingredient" /></p>
+   <p>Ingredient: <input type="text" name="ingredient" /></p>
+  <p>Ingredient: <input type="text" name="ingredient" /></p>
+   <p>Ingredient: <input type="text" name="ingredient" /></p>
+   <input type="submit" name="submit" value="SUBMIT" />
+</form>
+
+  <footer id="footer"></footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

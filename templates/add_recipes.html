@@ -2,54 +2,38 @@
 <html>
 
 <head>
-  <title>Recipe Master</title>
-  <link href="site.css" rel="stylesheet">
+    <title>Recipe Master</title>
+    <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='site.css') }}">
 </head>
 
 <body>
-  <nav id="navbar"></nav>
+    <nav id="navbar"></nav>
 
-  <div id="main">
-  <h1>Recipe Master</h1>
+    <div id="main">
+    <h1>Recipe Master</h1>
+    <p>SUBMIT RECIPE</p>
+    <form id="vtable" action="{{ url_for('submitEdited') }}" method="GET"><table><tr>
+        <th class="headcoil">Title</th>
+        <td class="tailcol"><textarea name="name" rows="1" cols="75"></textarea></td></tr>
+        <th class="headcoil">Diet</th>
+        <td class="tailcol"><textarea name="diet" rows="1" cols="75"></textarea></td></tr>
+        <th class="headcoil">Description</th>
+        <td class="tailcol"><textarea name="desc" rows="6" cols="75"></textarea></td></tr>
+        <th class="headcoil">Ingredients</th>
+        <td class="tailcol">
+            <textarea name="ingr" rows="6" cols="75" placeholder="measurment: ingredient"></textarea></td></tr>
+        <th class="headcoil">Instructions</th>
+        <td class="tailcol"><textarea name="inst" rows="10" cols="75"></textarea></td></tr>
+    </table>
 
-  <h2> Add Recipes </h2>
-<!--
-  <form action="#" method="get">
-Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
-Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
-Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
-Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
-Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
-Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
-Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
-Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
-Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
-Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
-Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
-Ingredient: <input type="text" name="name" placeholder="Ingredients"></input><br/>
+    
+    <input type="submit" class="button button-primary" value="submit" name="sub">
 
-<input type="submit" name="submit" value="Submit"></input>
-</form>
 
--->
-
-<form action="recipeform.php" method="post">
-   <p>Recipe Name: <input type="text" name="recipe_name" placeholder="Mysterious Wonders"/></p>
-
-   <p>Ingredient: <input type="text" name="ingredient" placeholder="1/2 cup of Flour" /></p>
-   <p>Ingredient: <input type="text" name="ingredient" placeholder="1 tbsp sugar"/></p>
-  <p>Ingredient: <input type="text" name="ingredient" /></p>
-   <p>Ingredient: <input type="text" name="ingredient" /></p>
-    <p>Ingredient: <input type="text" name="ingredient" /></p>
-   <p>Ingredient: <input type="text" name="ingredient" /></p>
-  <p>Ingredient: <input type="text" name="ingredient" /></p>
-   <p>Ingredient: <input type="text" name="ingredient" /></p>
-   <input type="submit" name="submit" value="SUBMIT" />
-</form>
-
-  <footer id="footer"></footer>
-  </div>
-
-  <script src="script.js"></script>
+    <input type="submit" class="button button-primary" value="cancel" name="can">
+    </form>
+    <footer id="footer"></footer>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

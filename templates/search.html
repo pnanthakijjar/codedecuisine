@@ -2,37 +2,48 @@
 <html>
 
 <head>
-  <title>Recipe Master</title>
-  <link href="site.css" rel="stylesheet">
+    <title>Recipe Master</title>
+    <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='site.css') }}">
 </head>
 
 <body>
-  <nav id="navbar"></nav>
+    <nav id="navbar"></nav>
 
-  <div id="main">
-  <h1>Recipe Master</h1>
-  <p>SEARCH RECIPES</p>
+    <div id="main">
+    <h1>Recipe Master</h1>
+    <h3>Search for Recipes</h3>
+    <form method="POST" id="search_box" class='search' action="{{ url_for('search') }}">
+        <p>Keywords: <input type="text" name="general" id="general" value="Null"></p>
+        <p>Diet: <input type="text" name="diet" id="diet" value="Null"></p>
 
-	<form action="post.html" method="post">
-	Diet: <input type="text" name="search" value="diet"></input><br>
-	Recipe Name: <input type="text" name="recipename" value="recipename"></input>
-	</form>
-    <ul>
-    {% for recipe in diet %}
-    Diet: 
-    <li>{{ recipe }}</li>
 
+        <input type="Submit" class="button button-primary" value="Search" name="Search">
+    </form>
+    <table id="t01">
+        <caption><h2>Results</h2></caption>
+        <tr>
+            <th>Title</th>
+            <th>Diet</th>
+            <th>Ingredients</th>
+            <th>Description</th>
+            <th>View</th>
+    </tr>
+    {% for ar in rv %}
+    <form method="GET" action="{{ url_for('view', rec_id=ar["recipeID"]) }}"><tr>
+        <td><textarea name="ingr" readonly rows="1" cols="20">{{ ar["name"] }}</textarea></td>
+        <td><textarea name="ingr" readonly rows="1" cols="10">{{ ar["diet"] }}</textarea></td>
+        <td><textarea name="ingr" readonly rows="4" cols="50">{{ ar["ingredients"] }}</textarea></td>
+        <td><textarea name="desc" readonly rows="4" cols="50">{{ ar["description"] }}</textarea></td>
+        <td>
+            <input type="hidden" name="rID" value="{{ ar["recipeID"] }}" >
+            <input type="submit" value="view" name="edi">
+        </td>
+    </tr></form>
     {% endfor %}
+    </table>
+    <footer id="footer"></footer>
+    </div>
 
-    {% for title in recipename %}
-    Recipe: 
-    <li>{{ title }}</li>
-
-    {% endfor %}
-    </ul>
-  <footer id="footer"></footer>
-  </div>
-
-  <script src="script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

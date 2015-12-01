@@ -3,7 +3,7 @@
 
 <head>
 	<title>Recipe Master</title>
-	<link href="site.css" rel="stylesheet">
+    <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='site.css') }}">
 </head>
 
 <body>
@@ -12,11 +12,10 @@
 	<div id="main">
 	<h1>Recipe Master</h1>
 	<p>HOMEPAGE</p>
-
-
 	<footer id="footer"></footer>
 	</div>
 
-	<script src="script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
+
